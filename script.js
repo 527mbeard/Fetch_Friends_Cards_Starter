@@ -61,10 +61,22 @@ function loadFriends() {
     });
 }
 
-
-
-
-
+async function loadFriends() {
+  try {
+    const response = await fetch("friends.json");
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    const friends = await response.json();
+    renderFriends(friends);
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      showDataError(error);
+    } else {
+      showLoadError();
+    }
+  }
+}
 
   // -------------------------------------------------------------
   // renderFriends: turns the array into cards. Do not change it for this lesson.
