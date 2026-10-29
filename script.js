@@ -41,16 +41,39 @@ loadButton.addEventListener("click", loadFriends);
 //   xhr.send(); //send
 // }
 
+function loadFriends() {
+  fetch("friends.json")
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    })
+    .then(function (friends) {
+      renderFriends(friends);
+    })
+    .catch(function (error) {
+      if (error instanceof SyntaxError) {
+        showDataError(error);
+      } else {
+        showLoadError();
+      }
+    });
+}
 
 
-// -------------------------------------------------------------
-// renderFriends: turns the array into cards. Do not change it for this lesson.
-// -------------------------------------------------------------
-function renderFriends(friends) {
-  let cardsHTML = "";
 
-  friends.forEach(function (friend) {
-    cardsHTML += `
+
+
+
+  // -------------------------------------------------------------
+  // renderFriends: turns the array into cards. Do not change it for this lesson.
+  // -------------------------------------------------------------
+  function renderFriends(friends) {
+    let cardsHTML = "";
+
+    friends.forEach(function (friend) {
+      cardsHTML += `
       <div class="col-12 col-md-6 col-lg-4">
         <article class="card h-100">
           <div class="card-body">
@@ -61,30 +84,30 @@ function renderFriends(friends) {
           </div>
         </article>
       </div>`;
-  });
+    });
 
-  cardsContainer.innerHTML = cardsHTML;
-  statusMessage.classList.remove("error");
-  statusMessage.textContent = `${friends.length} friends loaded.`;
-}
+    cardsContainer.innerHTML = cardsHTML;
+    statusMessage.classList.remove("error");
+    statusMessage.textContent = `${friends.length} friends loaded.`;
+  }
 
-// =============================================================
-// Supplied helpers. Do not change these.
-// =============================================================
+  // =============================================================
+  // Supplied helpers. Do not change these.
+  // =============================================================
 
-// Call when the file cannot be loaded: wrong name, 404, or no connection.
-function showLoadError() {
-  cardsContainer.innerHTML = "";
-  statusMessage.classList.add("error");
-  statusMessage.textContent =
-    "Could not load friends. Check the JSON file name and path, then try again.";
-}
+  // Call when the file cannot be loaded: wrong name, 404, or no connection.
+  function showLoadError() {
+    cardsContainer.innerHTML = "";
+    statusMessage.classList.add("error");
+    statusMessage.textContent =
+      "Could not load friends. Check the JSON file name and path, then try again.";
+  }
 
-// Call when the file loaded but its JSON is broken.
-function showDataError(error) {
-  cardsContainer.innerHTML = "";
-  statusMessage.classList.add("error");
-  statusMessage.textContent =
-    "friends.json loaded, but its data could not be used. Check quotes, commas, brackets, and key names.";
-  console.error("Data problem:", error.message);
-}
+  // Call when the file loaded but its JSON is broken.
+  function showDataError(error) {
+    cardsContainer.innerHTML = "";
+    statusMessage.classList.add("error");
+    statusMessage.textContent =
+      "friends.json loaded, but its data could not be used. Check quotes, commas, brackets, and key names.";
+    console.error("Data problem:", error.message);
+  }
