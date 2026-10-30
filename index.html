@@ -9,15 +9,23 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="container py-5">
-    <header class="mb-4">
-      <p class="eyebrow">2.03 Fetch + async/await</p>
-      <h1>Friends Cards</h1>
-      <p class="intro">A collection built from data. Click the button to load the people in friends.json.</p>
-      <button id="loadFriends" class="btn btn-primary" type="button">Load Friends</button>
-    </header>
-    <p id="status" role="status">Click Load Friends to begin.</p>
-    <section id="cards" class="row g-4" aria-label="Friends cards"></section>
-  </main>
+  <div class="page-shell">
+    <main class="container py-5">
+      <header class="hero mb-4">
+        <div class="hero__content">
+          <p class="eyebrow">2.03 Fetch + async/await</p>
+          <h1>Friends Cards</h1>
+          <p class="intro">A collection built from data. Click the button to load the people in friends.json.</p>
+        </div>
+        <button id="loadFriends" class="btn btn-primary" type="button">Load Friends</button>
+      </header>
+
+      <div class="status-bar">
+        <p id="status" role="status">Click Load Friends to begin.</p>
+      </div>
+
+      <section id="cards" class="row g-4" aria-label="Friends cards"></section>
+    </main>
+  </div>
 </body>
 </html>
