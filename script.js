@@ -41,25 +41,25 @@ loadButton.addEventListener("click", loadFriends);
 //   xhr.send(); //send
 // }
 
-function loadFriends() {
-  fetch("friends.json")
-    .then(function (response) {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
-    .then(function (friends) {
-      renderFriends(friends);
-    })
-    .catch(function (error) {
-      if (error instanceof SyntaxError) {
-        showDataError(error);
-      } else {
-        showLoadError();
-      }
-    });
-}
+// function loadFriends() {
+//   fetch("friends.json")
+//     .then(function (response) {
+//       if (!response.ok) {
+//         throw new Error(response.status);
+//       }
+//       return response.json();
+//     })
+//     .then(function (friends) {
+//       renderFriends(friends);
+//     })
+//     .catch(function (error) {
+//       if (error instanceof SyntaxError) {
+//         showDataError(error);
+//       } else {
+//         showLoadError();
+//       }
+//     });
+// }
 
 async function loadFriends() {
   try {
@@ -78,6 +78,7 @@ async function loadFriends() {
   }
 }
 
+// response.ok is used to catch HTTP errors
   // -------------------------------------------------------------
   // renderFriends: turns the array into cards. Do not change it for this lesson.
   // -------------------------------------------------------------
